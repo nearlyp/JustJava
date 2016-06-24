@@ -23,9 +23,9 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int numberOfCoffees = quantity;
-        display(numberOfCoffees);
-        displayPrice(numberOfCoffees * 5);
+        //int numberOfCoffees = quantity;
+        String priceMessage = "Your Price:" + quantity;
+        display(priceMessage);
     }
     /**
      * The following methods increment or decrement the number of coffees.

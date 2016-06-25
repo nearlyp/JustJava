@@ -23,10 +23,10 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int numberOfCoffees = quantity * 2.50;
-        String priceMessage = "Your Price: $" + quantity;
-	priceMessage = priceMessage + "\n Thank You!"
-        display(priceMessage);
+        double price = quantity * 2.50;
+        String priceMessage = "Your Price: $" + price;
+	    priceMessage = priceMessage + "\n Thank You!";
+        displayMessage(priceMessage);
     }
     /**
      * The following methods increment or decrement the number of coffees.
@@ -52,8 +52,17 @@ public class MainActivity extends ActionBarActivity {
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
+
     /**
-     * This method displays the given price on the screen.
+     * This method displays the price when passed to string.
+     */
+    private void displayMessage(String message) {
+        TextView quantityTextView = (TextView) findViewById(
+                R.id.price_text_view);
+        quantityTextView.setText(message);
+    }
+    /**
+     * This method displays the given price on the screen. Currently unused.
      */
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);

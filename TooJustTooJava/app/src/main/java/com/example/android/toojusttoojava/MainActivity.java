@@ -86,6 +86,6 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.order_summary_text_view);
-        quantityTextView.setText(message);
+        orderSummaryTextView.setText(message);
     }
 }

@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
      * These global variables store the quantity for an order and price per unit.
      */
     int quantity = 1;
-    double pricePerUnit = 2.50;
+    int pricePerUnit = 5;
+    String price = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +28,18 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = calculatePrice() + "\nThank You!";
-        displayMessage(priceMessage);
+//        String priceMessage = calculatePrice() + "\nThank You!";
+//        displayMessage(priceMessage);
+        createOrderSummary();
     }
 
     /**
      * Calculates the price of the order based on the current quantity and price per unit.
      * TODO: Actually, it seems to be just the one method which doens't call currency instance.
-     * */
-    private double calculatePrice() {
-        return quantity * pricePerUnit;
+     */
+    private String calculatePrice() {
+        price = "" + (quantity * pricePerUnit);
+        return price;
     }
 
     /**
@@ -44,17 +47,28 @@ public class MainActivity extends AppCompatActivity {
      * Decrement will not allow the order quantity to go below 0.
      */
     public void increment(View view) {
-        quantity ++;
+        quantity++;
         displayQuantity(quantity);
-        displayPrice(calculatePrice());
+        displayMessage(calculatePrice());
     }
 
     public void decrement(View view) {
-        if (quantity > 1){
-            quantity --;
+        if (quantity > 1) {
+            quantity--;
         }
         displayQuantity(quantity);
-        displayPrice(calculatePrice());
+        displayMessage(calculatePrice());
+    }
+
+    /**
+     * Create summary of order and return it as text based summary.
+     */
+
+    private void createOrderSummary() {
+        String name = "Kaptain Kunal";
+        displayMessage("Name: " + name +
+                "\nQuantity: " + quantity +
+                "\nTotal: " + calculatePrice());
     }
 
     /**
@@ -71,14 +85,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayMessage(String message) {
         TextView quantityTextView = (TextView) findViewById(
-                R.id.price_text_view);
+                R.id.order_summary_text_view);
         quantityTextView.setText(message);
-    }
-    /**
-     * This method displays the given price on the screen. Currently unused.
-     */
-    private void displayPrice(double number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 }

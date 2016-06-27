@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * These global variables store the quantity for an order and price per unit.
      */
-    int quantity = 0;
+    int quantity = 1;
     double pricePerUnit = 2.50;
 
     @Override
@@ -27,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Your Price: $" + calculatePrice(quantity);
-	    priceMessage = priceMessage + "\n Thank You!";
+        String priceMessage = calculatePrice() + "\nThank You!";
         displayMessage(priceMessage);
     }
 
     /**
      * Calculates the price of the order based on the current quantity and price per unit.
-     * TODO: Currently returns a double, will need to be adjusted later.
+     * TODO: Actually, it seems to be just the one method which doens't call currency instance.
      * */
-    private double calculatePrice(int quantity) {
+    private double calculatePrice() {
         return quantity * pricePerUnit;
     }
 
@@ -47,13 +46,15 @@ public class MainActivity extends AppCompatActivity {
     public void increment(View view) {
         quantity ++;
         displayQuantity(quantity);
+        displayPrice(calculatePrice());
     }
 
     public void decrement(View view) {
-        if (quantity > 0){
+        if (quantity > 1){
             quantity --;
         }
         displayQuantity(quantity);
+        displayPrice(calculatePrice());
     }
 
     /**
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given price on the screen. Currently unused.
      */
-    private void displayPrice(int number) {
+    private void displayPrice(double number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }

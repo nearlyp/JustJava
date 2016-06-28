@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void createOrderSummary() {
+        TextView nameTextView = (TextView) findViewById(R.id.name_field); /** Needs to be tweaked */
+        name = nameTextView.getText().toString(); /** to make sure it updates constantly. */
         String plusCream = "No";
         String plusChocolate = "No";
         CheckBox whippedCheckBox = (CheckBox) findViewById(R.id.checkWhipped);
@@ -122,8 +124,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addName(View view){
-        TextView nameTextView = (TextView) findViewById(R.id.editText);
-        name = nameTextView.getText().toString();
         createOrderSummary();
     }
 

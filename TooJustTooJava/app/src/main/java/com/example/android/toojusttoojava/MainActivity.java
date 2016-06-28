@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         if (chocolate) {
             plusChocolate = "Yes";
         }
-        displayMessage("Name: " + name +
+        displayMessage(getString(R.string.order_summary_name, name) +
                 "\n" + getString(R.string.quantity) + quantity +
                 "\n" + getString(R.string.cream) + plusCream +
                 "\n" + getString(R.string.chocolate) + plusChocolate +

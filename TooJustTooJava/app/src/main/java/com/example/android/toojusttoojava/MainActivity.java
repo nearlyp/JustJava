@@ -20,13 +20,12 @@ public class MainActivity extends AppCompatActivity {
      * as well as booleans to track their presence.
      */
     int quantity = 1;
-    int pricePerUnit = 5;
-    int whippedCream = 1;
-    int chocolatePrice = 2;
+    final int pricePerUnit = 5;
+    final int whippedCream = 1;
+    final int chocolatePrice = 2;
     boolean cream = false;
     boolean chocolate = false;
     String name;
-    String price;
 
 
     @Override
@@ -69,19 +68,14 @@ public class MainActivity extends AppCompatActivity {
         cream = whippedCheckBox.isChecked();
         chocolate =  chocolateCheckBox.isChecked();
         if (!cream && !chocolate) {
-            price = "" + (quantity * pricePerUnit);
             return "" + (quantity * pricePerUnit);
         }
         if (cream && !chocolate) {
-            price = "" + ((quantity * pricePerUnit) + (whippedCream * quantity));
             return "" + ((quantity * pricePerUnit) + (whippedCream * quantity));
         }
         if (!cream && chocolate) {
-            price = "" + ((quantity * pricePerUnit) + (chocolatePrice * quantity));
             return "" + ((quantity * pricePerUnit) + (chocolatePrice * quantity));
         }
-        price = "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
-        + (chocolatePrice * quantity));
         return "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
                 + (chocolatePrice * quantity));
     }
@@ -135,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
             plusChocolate = "Yes";
         }
         displayMessage("Name: " + name +
-                "\nQuantity: " + quantity +
-                "\nWhipped cream: " + plusCream +
-                "\nChocolate: " + plusChocolate +
-                "\nTotal: " + calculatePrice());
+                "\n" + getString(R.string.quantity) + quantity +
+                "\n" + getString(R.string.cream) + plusCream +
+                "\n" + getString(R.string.chocolate) + plusChocolate +
+                "\n" + getString(R.string.total) + calculatePrice());
     }
 
     /**

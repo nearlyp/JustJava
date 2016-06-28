@@ -31,14 +31,10 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingBottom="16dp"
+            style="@style/headings"
             android:text="@string/quantity"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
             tools:text="@string/quantity" />
 
         <LinearLayout
@@ -79,14 +75,10 @@
 
         <TextView
             android:id="@+id/toppings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingBottom="16dp"
+            style="@style/headings"
             android:text="@string/toppings"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
             tools:text="@string/toppings" />
 
         <CheckBox
@@ -102,20 +94,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="addChocolate"
+            android:paddingBottom="16dp"
             android:text="@string/chocolate"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
-
+            style="@style/headings"
             android:text="@string/orderSummary"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
             tools:text="@string/orderSummary" />
 
         <TextView

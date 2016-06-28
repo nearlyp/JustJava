@@ -2,9 +2,10 @@ package com.example.android.toojusttoojava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
-import java.text.NumberFormat;
 
 /**
  * This app displays an order form to order coffee.
@@ -16,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
      */
     int quantity = 1;
     int pricePerUnit = 5;
+    int whippedCream = 2;
+    int chocolatePrice = 2;
+    boolean cream = false;
+    boolean chocolate = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,35 +33,48 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-//        String priceMessage = calculatePrice() + "\nThank You!";
-//        displayMessage(priceMessage);
         createOrderSummary();
     }
 
     /**
      * Calculates the price of the order based on the current quantity and price per unit.
-     * TODO: Actually, it seems to be just the one method which doens't call currency instance.
+     * TODO: Actually, it seems to be just the one method which doesn't call currency instance.
      */
     private String calculatePrice() {
-        return "" + (quantity * pricePerUnit);
+        CheckBox whippedCheckBox = (CheckBox) findViewById(R.id.checkWhipped);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.checkChocolate);
+        cream = whippedCheckBox.isChecked();
+        chocolate =  chocolateCheckBox.isChecked();
+        if (!cream && !chocolate) {
+            return "" + (quantity * pricePerUnit);
         }
-
-    /**
-     * The following methods increment or decrement the number of coffees.
-     * Decrement will not allow the order quantity to go below 0.
-     */
-    private void increment(View view) {
-        quantity++;
-        displayQuantity(quantity);
-        displayMessage(calculatePrice());
+        if (cream && !chocolate) {
+            return "" + ((quantity * pricePerUnit) + (whippedCream * quantity));
+        }
+        if (!cream && chocolate) {
+            return "" + ((quantity * pricePerUnit) + (chocolatePrice * quantity));
+        }
+        return "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
+        + (chocolatePrice * quantity));
     }
 
-    private void decrement(View view) {
+        /**
+         * The following methods increment or decrement the number of coffees.
+         * Decrement will not allow the order quantity to go below 0.
+         */
+
+    public void increment(View view) {
+        quantity++;
+        displayQuantity(quantity);
+        createOrderSummary();
+    }
+
+    public void decrement(View view) {
         if (quantity > 1) {
             quantity--;
         }
         displayQuantity(quantity);
-        displayMessage(calculatePrice());
+        createOrderSummary();
     }
 
     /**
@@ -64,8 +83,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void createOrderSummary() {
         String name = "Kaptain Kunal";
+        String plusCream = "No";
+        String plusChocolate = "No";
+        CheckBox whippedCheckBox = (CheckBox) findViewById(R.id.checkWhipped);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.checkChocolate);
+        cream = whippedCheckBox.isChecked();
+        chocolate =  chocolateCheckBox.isChecked();
+        if (cream) {
+            plusCream = "Yes";
+        }
+        if (chocolate) {
+            plusChocolate = "Yes";
+        }
         displayMessage("Name: " + name +
                 "\nQuantity: " + quantity +
+                "\nWhipped cream: " + plusCream +
+                "\nChocolate: " + plusChocolate +
                 "\nTotal: " + calculatePrice());
     }
 
@@ -76,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
+    }
+
+    public void addCream(View view) {
+        createOrderSummary();
+    }
+
+    public void addChocolate(View view) {
+        createOrderSummary();
     }
 
     /**

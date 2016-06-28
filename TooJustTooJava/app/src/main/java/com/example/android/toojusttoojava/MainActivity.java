@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
      */
     int quantity = 1;
     int pricePerUnit = 5;
-    String price = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +37,20 @@ public class MainActivity extends AppCompatActivity {
      * TODO: Actually, it seems to be just the one method which doens't call currency instance.
      */
     private String calculatePrice() {
-        price = "" + (quantity * pricePerUnit);
-        return price;
-    }
+        return "" + (quantity * pricePerUnit);
+        }
 
     /**
      * The following methods increment or decrement the number of coffees.
      * Decrement will not allow the order quantity to go below 0.
      */
-    public void increment(View view) {
+    private void increment(View view) {
         quantity++;
         displayQuantity(quantity);
         displayMessage(calculatePrice());
     }
 
-    public void decrement(View view) {
+    private void decrement(View view) {
         if (quantity > 1) {
             quantity--;
         }
@@ -84,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the price when passed to string.
      */
     private void displayMessage(String message) {
-        TextView quantityTextView = (TextView) findViewById(
+        TextView orderSummaryTextView = (TextView) findViewById(
                 R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
+        orderSummaryTextView.setLineSpacing(2, 2);
     }
 }

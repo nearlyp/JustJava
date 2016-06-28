@@ -2,9 +2,9 @@ package com.example.android.toojusttoojava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * These global variables store the quantity for an order and price per unit.
+     * Also added variables for the price of whipped cream and chocolate add-ons,
+     * as well as booleans to track their presence.
      */
     int quantity = 1;
     int pricePerUnit = 5;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     int chocolatePrice = 2;
     boolean cream = false;
     boolean chocolate = false;
+    String name;
 
 
     @Override
@@ -82,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void createOrderSummary() {
-        String name = "Kaptain Kunal";
         String plusCream = "No";
         String plusChocolate = "No";
         CheckBox whippedCheckBox = (CheckBox) findViewById(R.id.checkWhipped);
@@ -116,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addChocolate(View view) {
+        createOrderSummary();
+    }
+
+    public void addName(View view){
+        TextView nameTextView = (TextView) findViewById(R.id.editText);
+        name = nameTextView.getText().toString();
         createOrderSummary();
     }
 

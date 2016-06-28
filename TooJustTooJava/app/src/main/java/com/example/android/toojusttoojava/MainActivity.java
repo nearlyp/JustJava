@@ -1,10 +1,11 @@
 package com.example.android.toojusttoojava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     boolean cream = false;
     boolean chocolate = false;
     String name;
+    String price;
 
 
     @Override
@@ -37,6 +39,23 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        String plusCream = "No";
+        String plusChocolate = "No";
+        CheckBox whippedCheckBox = (CheckBox) findViewById(R.id.checkWhipped);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.checkChocolate);
+        cream = whippedCheckBox.isChecked();
+        chocolate =  chocolateCheckBox.isChecked();
+        Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
+        mailIntent.setData(Uri.parse("mailto:"));
+        mailIntent.putExtra(Intent.EXTRA_SUBJECT, ("Just Java order"));
+        mailIntent.putExtra(Intent.EXTRA_TEXT, ("Name: " + name +
+                "\nQuantity: " + quantity +
+                "\nWhipped cream: " + plusCream +
+                "\nChocolate: " + plusChocolate +
+                "\nTotal: " + calculatePrice()));
+        if (mailIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(mailIntent, "Send Email"));
+        }
         createOrderSummary();
     }
 
@@ -50,16 +69,21 @@ public class MainActivity extends AppCompatActivity {
         cream = whippedCheckBox.isChecked();
         chocolate =  chocolateCheckBox.isChecked();
         if (!cream && !chocolate) {
+            price = "" + (quantity * pricePerUnit);
             return "" + (quantity * pricePerUnit);
         }
         if (cream && !chocolate) {
+            price = "" + ((quantity * pricePerUnit) + (whippedCream * quantity));
             return "" + ((quantity * pricePerUnit) + (whippedCream * quantity));
         }
         if (!cream && chocolate) {
+            price = "" + ((quantity * pricePerUnit) + (chocolatePrice * quantity));
             return "" + ((quantity * pricePerUnit) + (chocolatePrice * quantity));
         }
-        return "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
+        price = "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
         + (chocolatePrice * quantity));
+        return "" + ((quantity * pricePerUnit) + (whippedCream * quantity)
+                + (chocolatePrice * quantity));
     }
 
         /**

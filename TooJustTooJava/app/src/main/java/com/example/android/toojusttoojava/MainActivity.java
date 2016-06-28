@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This app displays an order form to order coffee.
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
      */
     int quantity = 1;
     int pricePerUnit = 5;
-    int whippedCream = 2;
+    int whippedCream = 1;
     int chocolatePrice = 2;
     boolean cream = false;
     boolean chocolate = false;
@@ -67,15 +68,25 @@ public class MainActivity extends AppCompatActivity {
          */
 
     public void increment(View view) {
-        quantity++;
+        if (quantity == 99){
+            Toast.makeText(this, "You cannot order more than 99 coffees!", Toast.LENGTH_SHORT).show();
+            displayQuantity(quantity);
+            createOrderSummary();
+            return;
+        }
+        quantity ++;
         displayQuantity(quantity);
         createOrderSummary();
     }
 
     public void decrement(View view) {
-        if (quantity > 1) {
-            quantity--;
+        if (quantity == 0) {
+            Toast.makeText(this, "You cannot sell us the coffee!!", Toast.LENGTH_SHORT).show();
+            displayQuantity(quantity);
+            createOrderSummary();
+            return;
         }
+        quantity--;
         displayQuantity(quantity);
         createOrderSummary();
     }

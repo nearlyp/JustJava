@@ -132,7 +132,8 @@
             android:onClick="submitOrder"
             android:text="@string/order"
             android:textColor="@android:color/black"
-            tools:text="@string/order" />
+            tools:text="@string/order"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
